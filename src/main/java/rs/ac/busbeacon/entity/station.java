@@ -1,5 +1,6 @@
-package rs.ac.busbeacon.entitiy;
+package rs.ac.busbeacon.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,34 +9,27 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity(name = "ticket")
+@Entity(name = "station")
 @NoArgsConstructor
 @Getter
 @Setter
 
-public class ticket {
+public class station {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ticketId;
+    private Integer station_id;
 
     @Column(nullable = false)
-    private Integer routeId;
+    private String city;
 
     @Column(nullable = false)
-    private Integer seatNumber;
-
-    @Column(nullable = false)
-    private BigDecimal price;
-
-    @Column(nullable = false)
-    private String qrCode;
+    private String adress;
 
     private LocalDateTime createdAt;
 
+    @JsonIgnore
     private LocalDateTime deletedAt;
 
     private LocalDateTime updatedAt;
-
-    private LocalDateTime paidAt;
 
 }
