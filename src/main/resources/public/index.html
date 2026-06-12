@@ -68,56 +68,61 @@
         </div>
 
         <div class="ticket">
-            <form id="form">
+            <div class="type">
+                    <div>
+                        <label for="from">From:</label>
+                        <select id="from" name="from" onblur="checkFrom()"></select>
+                        <span class="error" id="errorFrom"></span>
+                    </div>
 
-                <label>From:</label>
-                <select id="from"></select>
+                    <div>
+                        <label for="to" style="padding-left: 1.1vw;">To:</label>
+                        <select id="to" name="to" onblur="checkTo()"></select>
+                        <span class="error" id="errorTo"></span>
+                    </div>
 
-                <label>To:</label>
-                <select id="to"></select>
+                    <div class="ways">
+                        <label>Choose type of travel:</label>
 
-                <label id="type-of-trip">Choose type of trip</label>
-                <input type="radio" id="one-way" name="trip" value="one-way">
-                <label id="one-way"><i class="fa-solid fa-share"></i> One Way</label><br>
+                        <label for="one-way">
+                            <input type="radio" id="one-way" name="trip" value="one-way" onblur="checkTrip()">
+                            <i class="fa-solid fa-share"></i> One Way
+                        </label>
 
-                <input type="radio" id="round-trip" name="trip" value="round-trip">
-                <label id="round-trip"><i class="fa-solid fa-arrows-left-right"></i> Round Trip</label><br>
-                <button onclick="getFormDataString()">Serialize Form</button>
+                        <label for="round-trip">
+                            <input type="radio" id="round-trip" name="trip" value="round-trip" onblur="checkTrip()">
+                            <i class="fa-solid fa-arrows-left-right"></i> Round Trip
+                        </label>
 
-            </form>
 
-            <div id="qrCodeBox">
-                <img src="" id="qrCodeImg">
+                    </div>
+                    <span class="error" id="errorTrip"></span>
+
+            </div>
+
+            <hr style="max-width: 1px ;border: 2px solid #ffffff; margin: 0px 0;" class="separetor">
+
+            <div class="date">
+                <label style="font-size: large;">Enter start and end date:</label>
+                <span class="error" id="errorDate"></span>
+                <input type="date" id="dateStart" value="date-start" onblur="checkDate()">
+                <input type="date" id="dateEnd" value="date-end" onblur="checkDate()">
+
+                <input type="button" value="Submit" id="submit" onclick="finalCheckUp()" src="ticket.html"></input>
+                <span class="error" id="errorSubmit"></span>
+            </div>
+
+
+            <hr style="max-width: 1px ;border: 2px solid #ffffff; margin: 0px 0;" class="separetor">
+
+            <div class="miniimage">
+                <img src="./images/miniimage.png">
             </div>
 
         </div>
 
-        <script>
+        <script src="script.js"></script>
 
-            fetch("http://localhost:8080/api/station")
-                .then(rsp => rsp.json())
-                .then(data => {
-                    const list = document.getElementById('from')
-                    const list2 = document.getElementById('to')
-                    let content = '<option value="">---</option>'
-                    for (let city of data) {
-                        content += `
-                    <option id="city" value="${city.city}">${city.city}</option>
-                    `
-                    }
-                    list.innerHTML = content
-                    list2.innerHTML = content
-                })
-
-                
-            let qrCodeBox = document.getElementById("qrCodebox")
-            let qrCodeImg = document.getElementById("qrCodeImg")
-            let qrText = document.getElementById("form").toString()
-
-            function GeneratorOfQRCodes() {
-
-            }
-        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
             </script>
