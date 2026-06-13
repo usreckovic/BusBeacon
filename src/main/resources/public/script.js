@@ -1,8 +1,8 @@
 fetch("http://localhost:8080/api/station")
     .then(rsp => rsp.json())
     .then(data => {
-        const list = document.getElementById('from')
-        const list2 = document.getElementById('to')
+        let list = document.getElementById('from')
+        let list2 = document.getElementById('to')
         let content = '<option value="">---</option>'
         for (let city of data) {
             content += `
@@ -29,7 +29,7 @@ function getFromDataStringAndRedirect() {
 
 
 function checkFrom() {
-    const from = document.getElementById('from').value;
+    let from = document.getElementById('from').value;
 
     if (from === "") {
         document.getElementById('errorFrom').style.display = 'inline';
@@ -44,7 +44,7 @@ function checkFrom() {
 }
 
 function checkTo() {
-    const to = document.getElementById('to').value;
+    let to = document.getElementById('to').value;
 
     if (to === "") {
         document.getElementById('errorTo').style.display = 'inline';
@@ -59,7 +59,7 @@ function checkTo() {
 }
 
 function checkTrip() {
-    const trip = document.querySelector('input[name="trip"]:checked')
+    let trip = document.querySelector('input[name="trip"]:checked')
     if (!trip) {
         document.getElementById('errorTrip').innerHTML = "You have to select type of travel!";
         return false;
@@ -71,8 +71,8 @@ function checkTrip() {
 }
 
 function checkDate() {
-    const dateStart = document.getElementById('dateStart').value;
-    const dateEnd = document.getElementById('dateEnd').value;
+    let dateStart = document.getElementById('dateStart').value;
+    let dateEnd = document.getElementById('dateEnd').value;
 
     if (!dateStart) {
         document.getElementById('errorDate').innerHTML = "You have to select start date!";
@@ -83,9 +83,9 @@ function checkDate() {
         return false;
     }
 
-    const selectedStart = new Date(dateStart);
-    const selectedEnd = new Date(dateEnd)
-    const today = new Date();
+    let selectedStart = new Date(dateStart);
+    let selectedEnd = new Date(dateEnd)
+    let today = new Date();
     today.setHours(0, 0, 0, 0);
 
     if (selectedEnd < today) {
@@ -95,6 +95,11 @@ function checkDate() {
 
     if (selectedStart < today) {
         document.getElementById('errorDate').innerHTML = "Your date can't be in the past!";
+        return false;
+    }
+
+    if (selectedStart > selectedEnd){
+        document.getElementById('errorDate').innerHTML = "Start date must be before end date!";
         return false;
     }
 
@@ -108,13 +113,14 @@ function generalCheckUp() {
     let checkUpTrip = checkTrip();
     let checkUpDate = checkDate();
 
-    const to = document.getElementById('to').value;
-    const from = document.getElementById('from').value;
+    let to = document.getElementById('to').value;
+    let from = document.getElementById('from').value;
 
     if (to === from && from != "") {
         document.getElementById('errorTo').innerHTML = "You cant pick the same city!";
         return false;
     }
+    
 
     if (checkUpDate && checkUpFrom && checkUpTo && checkUpTrip) {
         return true;
@@ -130,24 +136,24 @@ function finalCheckUp() {
         errorSubmit.innerHTML = "Ticket Created Redirecting"
 
         let dateStart = document.getElementById('dateStart').value;
-        let dateEnd = document.getElementById('dateStart').value;
+        let dateEnd = document.getElementById('dateEnd').value;
         let trip = document.querySelector('input[name="trip"]:checked').value;
         let from = document.getElementById('from').value;
         let to = document.getElementById('to').value;
 
         localStorage.setItem('ticketData', JSON.stringify({ from, to, trip, dateStart, dateEnd }));
 
-        window.location.href = "./ticket.html"
+        window.location.href = "./purchase.html";
     }
 
     else {
-        errorSubmit.innerHTML = "Error creating a ticket"
+        errorSubmit.innerHTML = "Error creating a ticket";
     }
 
 }
 
 function loadTicket() {
-    const data = JSON.parse(localStorage.getItem('ticketData'));
+    let data = JSON.parse(localStorage.getItem('ticketData'));
 
     if (!data) {
         window.location.href = "./index.html";
@@ -161,3 +167,110 @@ function loadTicket() {
     document.getElementById('ticketDateEnd').textContent = data.dateEnd;
 }
 
+function emailCheck(event) {
+    let email = document.getElementById('email').value;
+
+    if (!email.match(/[a-z0-9\._%+!$&*=^|~#%'`?{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,16})/i)){
+        document.getElementById('errorEmail').innerHTML = 'Email Adress is not valid'
+        document.getElementById('errorEmail').style.color = 'white'
+        return false;
+    }
+    else{
+        document.getElementById('errorEmail').innerHTML = ''
+        return true;
+    }
+}
+
+function conditionsCheck(event){
+    let conditions = document.getElementById('conditions');
+
+    if(!conditions.checked){
+        document.getElementById('errorConditions').innerHTML = 'Please check the box to accept the Terms and Conditions before continuing.';
+        document.getElementById('errorConditions').style.color = 'white';
+        return false;
+    }
+    else{
+        document.getElementById('errorConditions').innerHTML = '';
+        return true;
+    }
+}
+
+function purchaseCheck() {
+    let purchaseEmail = emailCheck();
+    let purchaseConditions = conditionsCheck();
+
+    if (purchaseEmail && purchaseConditions) {
+        return true;
+    }
+
+    return false;
+}
+
+function purchaseGeneralCheck() {
+    let ticketData = JSON.parse(localStorage.getItem('ticketData'));
+
+    if (!ticketData || !ticketData.from || ticketData.from === "") {
+        return false;
+    }
+    if (!ticketData.to || ticketData.to === "") {
+        return false;
+    }
+    if (!ticketData.trip || ticketData.trip === "") {
+        return false;
+    }
+    if (!ticketData.dateStart || ticketData.dateStart === "") {
+        return false;
+    }
+    if (!ticketData.dateEnd || ticketData.dateEnd === "") {
+        return false;
+    }
+
+    return true;
+}
+
+function finalPurchaseCheck() {
+    let purchaseError = document.getElementById('purchaseError');
+
+    let generalValid = purchaseGeneralCheck();
+    let generalPurchase = purchaseCheck();
+
+    if (generalPurchase && generalValid) {
+        purchaseError.innerHTML = "Purchase Completed Redirecting"
+
+        let ticketData = JSON.parse(localStorage.getItem('ticketData'));
+        let email = document.getElementById('email').value;
+        let conditions = document.getElementById('conditions').checked;
+
+        localStorage.setItem('PurchaseTicketData', JSON.stringify({
+            from: ticketData.from,
+            to: ticketData.to,
+            trip:ticketData.trip,
+            dateStart:ticketData.dateStart,
+            dateEnd:ticketData.dateEnd,
+            email, conditions }));
+
+        window.location.href = "./ticket.html";
+    }
+
+    else {
+        purchaseError.innerHTML = "Error Purchasing a ticket";
+    }
+
+}
+
+function loadPurchasedTicket() {
+    let data = JSON.parse(localStorage.getItem('PurchaseTicketData'));
+
+    if (!data) {
+        window.location.href = "./index.html";
+        return;
+    }
+
+    document.getElementById('ticketFrom').textContent = data.from;
+    document.getElementById('ticketTo').textContent = data.to;
+    document.getElementById('ticketTrip').textContent = data.trip;
+    document.getElementById('ticketDateStart').textContent = data.dateStart;
+    document.getElementById('ticketDateEnd').textContent = data.dateEnd;
+    document.getElementById('email').textContent = data.email;
+    document.getElementById('conditions').textContent = data.conditions;
+}
