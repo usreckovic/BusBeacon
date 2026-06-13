@@ -26,7 +26,7 @@ function getFromDataStringAndRedirect() {
     window.location.href = "./ticket.html";
 }
 
-
+ /* Provere za stvari za index.html */
 
 function checkFrom() {
     let from = document.getElementById('from').value;
@@ -152,6 +152,8 @@ function finalCheckUp() {
 
 }
 
+ /* funkcija za purchase.html ucitavanje fajlova datih sa index.html */
+
 function loadTicket() {
     let data = JSON.parse(localStorage.getItem('ticketData'));
 
@@ -166,6 +168,8 @@ function loadTicket() {
     document.getElementById('ticketDateStart').textContent = data.dateStart;
     document.getElementById('ticketDateEnd').textContent = data.dateEnd;
 }
+
+ /* Purchase.html */
 
 function emailCheck(event) {
     let email = document.getElementById('email').value;
