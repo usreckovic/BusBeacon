@@ -46,12 +46,19 @@
                     </li>
                 </div>
 
+                <div class="about">
+                    <li class="nav-link">
+                        <a class="nav-link" href="./tickets.html"><i class="fa-solid fa-ticket-simple"></i>
+                            Tickets</a>
+                    </li>
+                </div>
+
             </ul>
         </div>
         </div>
     </nav>
     <div class="window">
-        <h1 class="infoTicket">Your Ticket</h1>
+        <h1 class="infoTicket">Your Information</h1>
 
         <div class="purchaseFrom">
             <i class="fa-solid fa-location-pin"></i> From:<label id="ticketFrom"></label> <i
@@ -64,17 +71,17 @@
         </div>
 
         <div class="purchaseType">
-            <i id="icon" class="fa-solid fa-share"> </i> Type:<label id="ticketTrip"></label> <i id="icon2"
+            <i id="icon" class="fa-solid fa-share"> </i><label id="ticketTrip"></label> <i id="icon2"
                 class="fa-solid fa-share"></i>
         </div>
 
         <div class="purchaseDateStart">
-            <i class="fa-solid fa-calendar-days"> </i>Starting from:<label id="ticketDateStart"></label> <i
+            <i class="fa-solid fa-calendar-days"> </i>Starting date:<label id="ticketDateStart"></label> <i
                 class="fa-solid fa-calendar-days"></i>
         </div>
 
         <div class="purchaseDateEnd">
-            <i class="fa-solid fa-calendar"></i> </i> Up until:<label id="ticketDateEnd"></label> <i
+            <i class="fa-solid fa-calendar"></i> </i> Ending date:<label id="ticketDateEnd"></label> <i
                 class="fa-solid fa-calendar"></i>
         </div>
 
@@ -114,6 +121,9 @@
             if (type === 'Round-Trip') {
                 document.getElementById('icon').classList.replace("fa-share", "fa-arrows-left-right")
                 document.getElementById('icon2').classList.replace("fa-share", "fa-arrows-left-right")
+            }
+            if (type === 'One-Way'){
+
             }
         };
     </script>

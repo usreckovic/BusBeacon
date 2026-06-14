@@ -8,21 +8,33 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Entity(name = "station")
+@Entity(name = "bus")
 @NoArgsConstructor
 @Getter
 @Setter
 
-public class station {
+public class bus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer stationId;
+    private Integer busId;
 
     @Column(nullable = false)
-    private String city;
+    private String brand;
 
     @Column(nullable = false)
-    private String adress;
+    private String model;
+
+    @Column(nullable = false)
+    private String imagePath;
+
+    @Column(nullable = false)
+    private Integer year;
+
+    @Column(nullable = false)
+    private Integer capacity;
+
+    @Column(nullable = false)
+    private boolean ac;
 
     private LocalDateTime createdAt;
 

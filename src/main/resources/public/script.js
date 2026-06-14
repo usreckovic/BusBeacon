@@ -9,16 +9,49 @@ fetch("http://localhost:8080/api/station")
                     <option id="city" value="${city.city}">${city.city}</option>
                     `
         }
-        list.innerHTML = content
-        list2.innerHTML = content
+        list.innerHTML = content;
+        list2.innerHTML = content;
+    })
+
+    fetch("http://localhost:8080/api/bus")
+    .then(rsp => rsp.json())
+    .then(data => {
+        let list = document.getElementById('busParts')
+        let content = ''
+        for (let bus of data) {
+            let hasAc = bus.ac ? 'Yes' : 'No';
+            content += `
+                    <div class="card mb-3" style="max-width: 1000px; border-radius: 30px; border: 5px solid #6abfff;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                            <img src="${bus.imagePath}" class="img-fluid rounded-start" alt="...">
+                        </div>
+                    <div class="col-md-8">
+                <div class="card-body">
+                    <h4 class="card-title">${bus.brand}</h4>
+                    <h5 class="card-text"> ${bus.model}</h5>
+                    <h6 class="card-text">Capacity ${bus.capacity} People.</h6>
+                    <h6 class="card-text">Manufactured year ${bus.year}</h6>
+                    <h6 class="card-text">Air Conditioning ${hasAc}</h6>
+                        <p class="card-text"><small class="text-body-secondary">Last updated ${bus.updatedAt}</small></p>
+                </div>
+            </div>
+            </div>
+                </div>
+                    `
+        }
+
+        list.innerHTML = content;
     })
 
 
-let qrCodeBox = document.getElementById("qrCodebox")
-let qrCodeImg = document.getElementById("qrCodeImg")
-let qrText = document.getElementById("form").toString()
-
 function GeneratorOfQRCodes() {
+
+    let qrCodeBox = document.getElementById("qrCodebox")
+    let qrCodeImg = document.getElementById("qrCodeImg")
+    let qrText = JSON.parse(localStorage.getItem('PurchaseTicketData')).stringify;
+
+    console.log(JSON.parse(localStorage.getItem('PurchaseTicketData')));
 
 }
 
@@ -26,7 +59,7 @@ function getFromDataStringAndRedirect() {
     window.location.href = "./ticket.html";
 }
 
- /* Provere za stvari za index.html */
+/* Provere za stvari za index.html */
 
 function checkFrom() {
     let from = document.getElementById('from').value;
@@ -78,7 +111,7 @@ function checkDate() {
         document.getElementById('errorDate').innerHTML = "You have to select start date!";
         return false;
     }
-    if (!dateEnd){
+    if (!dateEnd) {
         document.getElementById('errorDate').innerHTML = "You have to select end date!";
         return false;
     }
@@ -98,7 +131,7 @@ function checkDate() {
         return false;
     }
 
-    if (selectedStart > selectedEnd){
+    if (selectedStart > selectedEnd) {
         document.getElementById('errorDate').innerHTML = "Start date must be before end date!";
         return false;
     }
@@ -120,7 +153,7 @@ function generalCheckUp() {
         document.getElementById('errorTo').innerHTML = "You cant pick the same city!";
         return false;
     }
-    
+
 
     if (checkUpDate && checkUpFrom && checkUpTo && checkUpTrip) {
         return true;
@@ -152,7 +185,7 @@ function finalCheckUp() {
 
 }
 
- /* funkcija za purchase.html ucitavanje fajlova datih sa index.html */
+/* funkcija za purchase.html ucitavanje fajlova datih sa index.html */
 
 function loadTicket() {
     let data = JSON.parse(localStorage.getItem('ticketData'));
@@ -169,31 +202,31 @@ function loadTicket() {
     document.getElementById('ticketDateEnd').textContent = data.dateEnd;
 }
 
- /* Purchase.html */
+/* Purchase.html */
 
 function emailCheck(event) {
     let email = document.getElementById('email').value;
 
-    if (!email.match(/[a-z0-9\._%+!$&*=^|~#%'`?{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,16})/i)){
+    if (!email.match(/[a-z0-9\._%+!$&*=^|~#%'`?{}/\-]+@([a-z0-9\-]+\.){1,}([a-z]{2,16})/i)) {
         document.getElementById('errorEmail').innerHTML = 'Email Adress is not valid'
         document.getElementById('errorEmail').style.color = 'white'
         return false;
     }
-    else{
+    else {
         document.getElementById('errorEmail').innerHTML = ''
         return true;
     }
 }
 
-function conditionsCheck(event){
+function conditionsCheck(event) {
     let conditions = document.getElementById('conditions');
 
-    if(!conditions.checked){
+    if (!conditions.checked) {
         document.getElementById('errorConditions').innerHTML = 'Please check the box to accept the Terms and Conditions before continuing.';
         document.getElementById('errorConditions').style.color = 'white';
         return false;
     }
-    else{
+    else {
         document.getElementById('errorConditions').innerHTML = '';
         return true;
     }
@@ -248,10 +281,11 @@ function finalPurchaseCheck() {
         localStorage.setItem('PurchaseTicketData', JSON.stringify({
             from: ticketData.from,
             to: ticketData.to,
-            trip:ticketData.trip,
-            dateStart:ticketData.dateStart,
-            dateEnd:ticketData.dateEnd,
-            email, conditions }));
+            trip: ticketData.trip,
+            dateStart: ticketData.dateStart,
+            dateEnd: ticketData.dateEnd,
+            email
+        }));
 
         window.location.href = "./ticket.html";
     }
@@ -276,5 +310,6 @@ function loadPurchasedTicket() {
     document.getElementById('ticketDateStart').textContent = data.dateStart;
     document.getElementById('ticketDateEnd').textContent = data.dateEnd;
     document.getElementById('email').textContent = data.email;
-    document.getElementById('conditions').textContent = data.conditions;
 }
+
+

@@ -46,17 +46,48 @@
                     </li>
                 </div>
 
+                <div class="about">
+                    <li class="nav-link">
+                        <a class="nav-link" href="./tickets.html"><i class="fa-solid fa-ticket-simple"></i>
+                            Tickets</a>
+                    </li>
+                </div>
+
             </ul>
         </div>
         </div>
     </nav>
-    <p>From: <span id="ticketFrom"></span></p>
-    <p>To: <span id="ticketTo"></span></p>
-    <p>Type: <span id="ticketTrip"></span></p>
-    <p>Starting Date: <span id="ticketDateStart"></span></p>
-    <p>End Date: <span id="ticketDateEnd"></span></p>
-    <p>Email: <span id="email"></span></p>
-    <p>conditions: <span id="conditions"></span></p>
+    <div class="purchaseTicket">
+        <h1 class="infoTicket">Your Ticket</h1>
+        <div class="purchaseFrom">
+            <i class="fa-solid fa-location-pin"></i> From:<label id="ticketFrom"></label> <i
+                class="fa-solid fa-location-pin"></i>
+        </div>
+
+        <div class="purchaseTo">
+            <i class="fa-solid fa-location-dot"></i> To:<label id="ticketTo"></label> <i
+                class="fa-solid fa-location-dot"></i>
+        </div>
+
+        <div class="purchaseType">
+            <i id="icon" class="fa-solid fa-share"> </i><label id="ticketTrip"></label> <i id="icon2"
+                class="fa-solid fa-share"></i>
+        </div>
+
+        <div class="purchaseDateStart">
+            <i class="fa-solid fa-calendar-days"> </i>Starting date:<label id="ticketDateStart"></label> <i
+                class="fa-solid fa-calendar-days"></i>
+        </div>
+
+        <div class="purchaseDateEnd">
+            <i class="fa-solid fa-calendar"></i> </i> Ending date:<label id="ticketDateEnd"></label> <i
+                class="fa-solid fa-calendar"></i>
+        </div>
+        <div class="purchaseEmail">
+            <i class="fa-solid fa-envelope"> </i> Email: <label id="email"></label> <i class="fa-solid fa-envelope"></i>
+        </div>
+
+    </div>
     </div>
 
     <script src="script.js"></script>
@@ -69,6 +100,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
         </script>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let qrCodeBox = document.getElementById("qrCodebox");
+            let qrCodeImg = document.getElementById("qrCodeImg");
+
+            const data = JSON.parse(localStorage.getItem('PurchaseTicketData'));
+            let qrText = JSON.stringify(data);
+
+        });
+    </script>
 
 </body>
 
