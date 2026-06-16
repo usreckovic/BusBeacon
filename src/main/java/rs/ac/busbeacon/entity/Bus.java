@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 
-public class bus {
+public class Bus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer busId;

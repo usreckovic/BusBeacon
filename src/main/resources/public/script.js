@@ -1,3 +1,48 @@
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.insertAdjacentHTML('afterbegin',`    <nav class="navbar navbar-expand-lg navbar-white bg-custom-color">
+        <div class="container">
+            <a class="navbar-brand" href="./index.html">
+                Bus<i class="fa-solid fa-bus fa-l" style="color: rgb(255, 255, 255);"></i>Beacon</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-1">
+
+                <div class="ikona">
+                    <li class="nav-link">
+                        <a class="nav-link" aria-current="page" href="./index.html"><i class="fa-solid fa-house"></i>
+                            Home</a>
+                    </li>
+                </div>
+
+                <div class="ikona">
+                    <li class="nav-link">
+                        <a class="nav-link" href="./buses.html"><i class="fa-solid fa-list"></i>
+                            Buses</a>
+                    </li>
+                </div>
+
+                <div class="about">
+                    <li class="nav-link">
+                        <a class="nav-link" href="./stations.html"><i class="fa-solid fa-location-dot"></i>
+                            Stations</a>
+                    </li>
+                </div>
+
+                <div class="about">
+                    <li class="nav-link">
+                        <a class="nav-link" href="./tickets.html"><i class="fa-solid fa-ticket-simple"></i>
+                            Tickets</a>
+                    </li>
+                </div>
+
+            </ul>
+        </div>
+        </div>
+    </nav>`
+    )
+})
+
 fetch("http://localhost:8080/api/station")
     .then(rsp => rsp.json())
     .then(data => {
@@ -13,35 +58,47 @@ fetch("http://localhost:8080/api/station")
         list2.innerHTML = content;
     })
 
-    fetch("http://localhost:8080/api/bus")
+fetch("http://localhost:8080/api/bus")
     .then(rsp => rsp.json())
     .then(data => {
         let list = document.getElementById('busParts')
+        if(list){
         let content = ''
-        for (let bus of data) {
-            let hasAc = bus.ac ? 'Yes' : 'No';
+        for (let Bus of data) {
+            let hasAc = Bus.ac ? 'Yes' : 'No';
             content += `
-                    <div class="card mb-3" style="max-width: 1000px; border-radius: 30px; border: 5px solid #6abfff;">
+                    <div class="card mb-3" style="max-width: 1000px; overflow: hidden; border-radius: 30px; border: 5px solid #6abfff;">
                         <div class="row g-0">
                             <div class="col-md-4">
-                            <img src="${bus.imagePath}" class="img-fluid rounded-start" alt="...">
+                            <img src="${Bus.imagePath}" class="img-fluid rounded-start" id="busImages" alt="...">
                         </div>
                     <div class="col-md-8">
                 <div class="card-body">
-                    <h4 class="card-title">${bus.brand}</h4>
-                    <h5 class="card-text"> ${bus.model}</h5>
-                    <h6 class="card-text">Capacity ${bus.capacity} People.</h6>
-                    <h6 class="card-text">Manufactured year ${bus.year}</h6>
+                    <h4 class="card-title">${Bus.brand}</h4>
+                    <h5 class="card-text"> ${Bus.model}</h5>
+                    <h6 class="card-text">Capacity: ${Bus.capacity} People</h6>
+                    <h6 class="card-text">Manufactured year ${Bus.year}</h6>
                     <h6 class="card-text">Air Conditioning ${hasAc}</h6>
-                        <p class="card-text"><small class="text-body-secondary">Last updated ${bus.updatedAt}</small></p>
+                        <p class="card-text"><small class="text-body-secondary">Last updated ${Bus.updatedAt}</small></p>
                 </div>
-            </div>
+            </div class="buttonForEach">
+                <button id="editButtonBus" class="btn btn-sm btn-success" type="button" onclick="editBus(${Bus.busId})">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+
+                <button id="deleteButtonBus" class="btn btn-sm btn-danger" type="button" onclick="deleteBus(${Bus.busId})">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
             </div>
                 </div>
-                    `
+            `;
+        
+        }
+        list.innerHTML = content;
+    } else {
+            console.log("Not on the list")
         }
 
-        list.innerHTML = content;
     })
 
 
@@ -312,4 +369,57 @@ function loadPurchasedTicket() {
     document.getElementById('email').textContent = data.email;
 }
 
+
+function deleteBus(id) {
+    if (window.confirm(`Delete bus ${id}?`)) {
+
+        fetch(`/api/bus/${id}`, {
+            method: 'DELETE'
+        })
+        .then(rsp => {
+            if (rsp.ok) {
+                window.location.reload();
+            }
+        });
+    }
+}
+
+function addBus(){
+    window.location.href = "./add-bus.html";
+}
+
+function editBus(id) {
+    window.location.href = "./edit-bus.html?id=" + id;
+}
+
+function getUrlData(url, actionAfterDataArrives){
+    fetch(url)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(databaseData){
+            actionAfterDataArrives(databaseData)
+        });
+}
+
+
+    fetch("http://localhost:8080/api/bus")
+    .then(rsp => rsp.json())
+    .then(data => {
+        let dataList = document.getElementById('imageSuggestions')
+
+        if(dataList){
+            let diffrentImages = [];
+            let optionsHTML = '';
+
+            for(let Bus of data){
+                if (Bus.imagePath && !diffrentImages.includes(Bus.imagePath)){
+                    diffrentImages.push(Bus.imagePath);
+                    optionsHTML += `<option value="${Bus.imagePath}"></option>`;
+                }
+            }
+
+        dataList.innerHTML = optionsHTML;
+        }
+    });
 

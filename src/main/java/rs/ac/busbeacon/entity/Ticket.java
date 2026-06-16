@@ -6,29 +6,36 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity(name = "station")
+@Entity(name = "ticket")
 @NoArgsConstructor
 @Getter
 @Setter
 
-public class station {
+public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer stationId;
+    private Integer ticketId;
 
     @Column(nullable = false)
-    private String city;
+    private Integer routeId;
 
     @Column(nullable = false)
-    private String adress;
+    private Integer seatNumber;
+
+    @Column(nullable = false)
+    private BigDecimal price;
+
+    @Column(nullable = false)
+    private String qrCode;
 
     private LocalDateTime createdAt;
 
     @JsonIgnore
     private LocalDateTime deletedAt;
 
-    private LocalDateTime updatedAt;
+    private LocalDateTime paidAt;
 
 }
