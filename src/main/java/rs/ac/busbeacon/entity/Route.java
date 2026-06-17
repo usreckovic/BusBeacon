@@ -5,33 +5,28 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import rs.ac.busbeacon.entity.Bus;
 
 import java.time.LocalDateTime;
 
-@Entity(name = "station")
+@Entity(name = "route")
 @NoArgsConstructor
 @Getter
 @Setter
-
-public class Station {
+public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer stationId;
+    private Integer routeId;
 
-    @Column(nullable = false)
-    private String city;
+    @ManyToOne
+    @JoinColumn(name = "bus_id")
+    private Bus bus;
 
-    @Column(nullable = false)
-    private String address;
+    private LocalDateTime departureTime;
 
-    @Column(nullable = false)
-    private Integer gates;
+    private LocalDateTime arrivalTime;
 
     private LocalDateTime createdAt;
 
-    @JsonIgnore
-    private LocalDateTime deletedAt;
-
     private LocalDateTime updatedAt;
-
 }

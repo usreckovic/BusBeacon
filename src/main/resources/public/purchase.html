@@ -13,80 +13,87 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 </head>
-    <div class="window">
-        <h1 class="infoTicket">Your Information</h1>
+<div class="window">
+    <h1 class="infoTicket">Your Information</h1>
 
-        <div class="purchaseFrom">
-            <i class="fa-solid fa-location-pin"></i> From:<label id="ticketFrom"></label> <i
-                class="fa-solid fa-location-pin"></i>
-        </div>
+    <div class="purchaseFrom">
+        <i class="fa-solid fa-location-pin"></i> From:<label id="ticketFrom"></label> <i
+            class="fa-solid fa-location-pin"></i>
+    </div>
 
-        <div class="purchaseTo">
-            <i class="fa-solid fa-location-dot"></i> To:<label id="ticketTo"></label> <i
-                class="fa-solid fa-location-dot"></i>
-        </div>
+    <div class="purchaseTo">
+        <i class="fa-solid fa-location-dot"></i> To:<label id="ticketTo"></label> <i
+            class="fa-solid fa-location-dot"></i>
+    </div>
 
-        <div class="purchaseType">
-            <i id="icon" class="fa-solid fa-share"> </i><label id="ticketTrip"></label> <i id="icon2"
-                class="fa-solid fa-share"></i>
-        </div>
+    <div class="purchaseType">
+        <i id="icon" class="fa-solid fa-share"> </i><label id="ticketTrip"></label> <i id="icon2"
+            class="fa-solid fa-share"></i>
+    </div>
 
-        <div class="purchaseDateStart">
-            <i class="fa-solid fa-calendar-days"> </i>Starting date:<label id="ticketDateStart"></label> <i
-                class="fa-solid fa-calendar-days"></i>
-        </div>
+    <div class="purchaseDateStart">
+        <i class="fa-solid fa-calendar-days"> </i>Starting date:<label id="ticketDateStart"></label> <i
+            class="fa-solid fa-calendar-days"></i>
+    </div>
 
-        <div class="purchaseDateEnd">
-            <i class="fa-solid fa-calendar"></i> </i> Ending date:<label id="ticketDateEnd"></label> <i
-                class="fa-solid fa-calendar"></i>
-        </div>
+    <div class="purchaseDateEnd">
+        <i class="fa-solid fa-calendar"></i> </i> Ending date:<label id="ticketDateEnd"></label> <i
+            class="fa-solid fa-calendar"></i>
+    </div>
 
-        <div class="TermsAndConditions">
-            <input id="conditions" type="checkbox" onblur="conditionsCheck(event)"> I have read and agree to the Terms
-            and Conditions
-            <div>
-                <span id="errorConditions"></span>
-            </div>
-        </div>
+    <div class="TermsAndConditions">
+        <input id="conditions" type="checkbox" onblur="conditionsCheck(event)"> I have read and agree to the Terms
+        and Conditions
         <div>
-            <input type="button" value="Purchase" class="Purchase" onclick="finalPurchaseCheck()" src="ticket.html"></input>
+            <span id="errorConditions"></span>
         </div>
-        <span id="purchaseError"></span>
-
-
-        <div class="purchaseEmail">
-            <label>Please Enter Your Email Adress:</label>
-            <input class="purchaseEmailBox" type="email" placeholder="example@gmail.com" id="email"
-                onblur="emailCheck(event)">
-        </div>
-        <span id="errorEmail"></span>
-
     </div>
+    <div>
+        <input type="button" value="Purchase" class="Purchase" onclick="finalPurchaseCheck()"
+            src="redirectToTicket()"></input>
     </div>
+    <span id="purchaseError"></span>
 
-    <script src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            loadTicket();
-        });
+</div>
+</div>
+
+<script src="script.js"></script>
+<script>
+    let urlParams = new URLSearchParams(window.location.search);
+    let ticketId = urlParams.get('id');
+    if (!ticketId || ticketId.trim() === '') {
+        window.location.href = './index.html';
+    }
+
+    let data = JSON.parse(localStorage.getItem('ticketData'));
+
+    if(!data || data.ticketId != ticketId){
+        window.location.href = './index.html';
+    }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        loadTicket();
+        GeneratorOfQRCodes()
+    });
+</script>
+<script>
+    window.onload = function () {
+        let type = document.getElementById('ticketTrip').textContent;
+        let icon = document.getElementById('icon');
+        if (type === 'Round-Trip') {
+            document.getElementById('icon').classList.replace("fa-share", "fa-arrows-left-right")
+            document.getElementById('icon2').classList.replace("fa-share", "fa-arrows-left-right")
+        }
+        if (type === 'One-Way') {
+
+        }
+    };
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
     </script>
-    <script>
-        window.onload = function () {
-            let type = document.getElementById('ticketTrip').textContent;
-            let icon = document.getElementById('icon');
-            if (type === 'Round-Trip') {
-                document.getElementById('icon').classList.replace("fa-share", "fa-arrows-left-right")
-                document.getElementById('icon2').classList.replace("fa-share", "fa-arrows-left-right")
-            }
-            if (type === 'One-Way'){
-
-            }
-        };
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
-        </script>
 
 </body>
 

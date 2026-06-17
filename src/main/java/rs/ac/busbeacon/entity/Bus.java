@@ -24,7 +24,6 @@ public class Bus {
     @Column(nullable = false)
     private String model;
 
-    @Column(nullable = false)
     private String imagePath;
 
     @Column(nullable = false)

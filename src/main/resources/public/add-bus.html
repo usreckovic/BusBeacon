@@ -15,13 +15,113 @@
 </head>
 
 <body>
-    <div class="addBusContainer"></div>
+    <div class="busTitle">
+        <i class="fa-solid fa-plus"></i> <label>Add Bus</label>
+    </div>
+    <div class="addBusContainer">
 
+
+        <div class="mb-3">
+            <label for="Brand" class="form-label">Brand:</label>
+            <input type="text" class="form-control" id="busBrand" onblur="checkBrand()">
+            <span id="errorBusBrand" class="errorBusBrand"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="Model" class="form-label">Model:</label>
+            <input type="text" class="form-control" id="busModel">
+
+        </div>
+
+        <div class="mb-3">
+            <label for="Year" class="form-label">Year:</label>
+            <input type="number" class="form-control" id="busYear" onblur="checkYear()">
+            <span id="errorBusYear" class="errorBusYear"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="Capacity" class="form-label">Capacity:</label>
+            <input type="number" class="form-control" id="busCapacity" onblur="checkCapacity()">
+            <span id="errorBusCapacity" class="errorBusCapacity"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="AC" class="form-label">AC</label>
+            <input type="checkbox" name="ac" id="busAc">
+        </div>
+
+        <div class="mb-3">
+            <label for="imageUrl">Image:</label>
+            <input type="text" id="busImage" list="imageSuggestions">
+        </div>
+        <datalist id="imageSuggestions"></datalist>
+
+
+        <div class="card-footer">
+            <button type="button" class="btn btn-success" id="busSave">
+                <i class="fa-solid fa-floppy-disk"></i> Create
+            </button>
+            <span id="errorBusSave"></span>
+        </div>
+
+    </div>
     <script src="script.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
         </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let inputBrand = document.getElementById('busBrand');
+            let inputModel = document.getElementById('busModel');
+            let inputYear = document.getElementById('busYear');
+            let inputCapacity = document.getElementById('busCapacity');
+            let inputImage = document.getElementById('busImage');
+
+            function openBuses() {
+                window.location.href = './buses.html';
+            }
+
+            function defaultImage() {
+                let image = document.getElementById('busImage');
+                if (!image.value) {
+                    return '/images/defaultBus.png';
+                }
+                else {
+                    return image.value;
+                }
+            }
+
+            document.getElementById('busSave').addEventListener('click', () => {
+                let checkUp = finalBusCheckUp();
+
+                if (!checkUp) return;
+
+                let confirmingUser = window.confirm('Create New Bus?');
+                let isChecked = document.getElementById('busAc').checked;
+
+                if (confirmingUser) {
+                    fetch('/api/bus', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            brand: inputBrand.value,
+                            model: inputModel.value,
+                            year: parseInt(inputYear.value),
+                            capacity: parseInt(inputCapacity.value),
+                            imagePath: defaultImage(),
+                            ac: isChecked
+                        })
+                    })
+                        .then(rsp => {
+                            if (rsp.ok) openBuses();
+                        })
+                }
+            });
+        });
+
+    </script>
 
 </body>
 

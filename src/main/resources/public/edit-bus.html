@@ -15,6 +15,9 @@
 </head>
 
 <body>
+    <div class="busTitle">
+        <i class="fa-solid fa-pen-to-square"></i> <label>Edit Bus</label>
+    </div>
     <div class="editBusContainer">
 
         <div class="mb-3">
@@ -24,40 +27,45 @@
 
         <div class="mb-3">
             <label for="Brand" class="form-label">Brand:</label>
-            <input type="text" class="form-control" id="busBrand">
+            <input type="text" class="form-control" id="busBrand" onblur="checkBrand()">
+            <span id="errorBusBrand" class="errorBusBrand"></span>
         </div>
 
         <div class="mb-3">
             <label for="Model" class="form-label">Model:</label>
             <input type="text" class="form-control" id="busModel">
+
         </div>
 
         <div class="mb-3">
             <label for="Year" class="form-label">Year:</label>
-            <input type="number" class="form-control" id="busYear">
+            <input type="number" class="form-control" id="busYear" onblur="checkYear()">
+            <span id="errorBusYear" class="errorBusYear"></span>
         </div>
 
         <div class="mb-3">
             <label for="Capacity" class="form-label">Capacity:</label>
-            <input type="number" class="form-control" id="busCapacity">
+            <input type="number" class="form-control" id="busCapacity" onblur="checkCapacity()">
+            <span id="errorBusCapacity" class="errorBusCapacity"></span>
         </div>
 
         <div class="mb-3">
             <label for="AC" class="form-label">AC</label>
-            <input type="checkbox" id="busAc">
+            <input type="checkbox" name="ac" id="busAc">
         </div>
 
         <div class="mb-3">
-            <label for="imageUrl">Image Link (URL):</label>
+            <label for="imageUrl">Image:</label>
             <input type="text" id="busImage" list="imageSuggestions">
         </div>
         <datalist id="imageSuggestions"></datalist>
 
 
         <div class="card-footer">
-            <button type="button" class="btn btn-success" id="save">
+            <button type="button" class="btn btn-success" id="busSave" onclick="finalBusCheckUp()">
                 <i class="fa-solid fa-floppy-disk"></i> Save
             </button>
+            <span id="errorBusSave"></span>
         </div>
 
     </div>
@@ -81,10 +89,6 @@
         let inputAc = document.getElementById('busAc')
         let inputImage = document.getElementById('busImage')
 
-        function openBuses() {
-            window.location.href = './buses.html'
-        }
-
         if (id == null || id == '') {
             openBuses()
         }
@@ -99,23 +103,25 @@
             inputAc.value = data.ac
         })
 
-        document.getElementById('save').addEventListener('click', () => {
+        document.getElementById('busSave').addEventListener('click', () => {
+            let checkUp = finalBusCheckUp();
+            if (!checkUp) return;
             let confirmingUser = window.confirm('Save changes?');
             let isChecked = document.getElementById('busAc').checked;
             if (confirmingUser) {
                 fetch(`api/bus/${id}`, {
                     method: 'PUT',
                     headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            brand: inputBrand.value,
-                            model: inputModel.value,
-                            year: inputYear.value,
-                            capacity: inputCapacity.value,
-                            imagePath: inputImage.value,
-                            ac: isChecked
-                        })
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        brand: inputBrand.value,
+                        model: inputModel.value,
+                        year: inputYear.value,
+                        capacity: inputCapacity.value,
+                        imagePath: inputImage.value,
+                        ac: isChecked
+                    })
                 })
                     .then(rsp => {
                         if (rsp.ok) {
@@ -124,8 +130,6 @@
                     });
             }
         });
-            
-
 
 
     </script>

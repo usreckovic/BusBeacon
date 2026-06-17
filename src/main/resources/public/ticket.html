@@ -15,48 +15,65 @@
 </head>
 
 <body></body>
-    <div class="purchaseTicket">
-        <h1 class="infoTicket">Your Ticket</h1>
-        <div class="purchaseFrom">
-            <i class="fa-solid fa-location-pin"></i> From:<label id="ticketFrom"></label> <i
-                class="fa-solid fa-location-pin"></i>
-        </div>
+<div class="purchaseTicket">
+    <h1 class="infoTicket">Your Ticket</h1>
 
-        <div class="purchaseTo">
-            <i class="fa-solid fa-location-dot"></i> To:<label id="ticketTo"></label> <i
-                class="fa-solid fa-location-dot"></i>
-        </div>
-
-        <div class="purchaseType">
-            <i id="icon" class="fa-solid fa-share"> </i><label id="ticketTrip"></label> <i id="icon2"
-                class="fa-solid fa-share"></i>
-        </div>
-
-        <div class="purchaseDateStart">
-            <i class="fa-solid fa-calendar-days"> </i>Starting date:<label id="ticketDateStart"></label> <i
-                class="fa-solid fa-calendar-days"></i>
-        </div>
-
-        <div class="purchaseDateEnd">
-            <i class="fa-solid fa-calendar"></i> </i> Ending date:<label id="ticketDateEnd"></label> <i
-                class="fa-solid fa-calendar"></i>
-        </div>
-        <div class="purchaseEmail">
-            <i class="fa-solid fa-envelope"> </i> Email: <label id="email"></label> <i class="fa-solid fa-envelope"></i>
-        </div>
-
-    </div>
+    <div id="qrContainer">
+        <img id="qrImage"></img>
     </div>
 
-    <script src="script.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            loadPurchasedTicket()
-        });
-    </script>
+    <div class="purchaseFrom">
+        <i class="fa-solid fa-location-pin"></i> From:<label id="ticketFrom"></label> <i
+            class="fa-solid fa-location-pin"></i>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+    <div class="purchaseTo">
+        <i class="fa-solid fa-location-dot"></i> To:<label id="ticketTo"></label> <i
+            class="fa-solid fa-location-dot"></i>
+    </div>
+
+    <div class="purchaseType">
+        <i id="icon" class="fa-solid fa-share"> </i><label id="ticketTrip"></label> <i id="icon2"
+            class="fa-solid fa-share"></i>
+    </div>
+
+    <div class="purchaseDateStart">
+        <i class="fa-solid fa-calendar-days"> </i>Starting date:<label id="ticketDateStart"></label> <i
+            class="fa-solid fa-calendar-days"></i>
+    </div>
+
+    <div class="purchaseDateEnd">
+        <i class="fa-solid fa-calendar"></i> </i> Ending date:<label id="ticketDateEnd"></label> <i
+            class="fa-solid fa-calendar"></i>
+    </div>
+
+</div>
+</div>
+
+<script src="script.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const ticketId = urlParams.get('id');
+
+        if (!ticketId || ticketId.trim() === '') {
+            window.location.href = './index.html';
+            return;
+        }
+        let data = JSON.parse(localStorage.getItem('PurchaseTicketData'));
+
+        if (!data || data.ticketId != ticketId) {
+            window.location.href = './index.html';
+            return;
+        }
+
+        loadPurchasedTicket();
+        GeneratorOfQRCodes();
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
     </script>
 
 </body>

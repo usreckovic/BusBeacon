@@ -27,6 +27,7 @@ public class BusService {
     public Bus create(Bus entity) {
         Bus bus = new Bus();
         bus.setBrand(entity.getBrand());
+        bus.setModel(entity.getModel());
         bus.setCapacity(entity.getCapacity());
         bus.setAc(entity.isAc());
         bus.setImagePath(entity.getImagePath());

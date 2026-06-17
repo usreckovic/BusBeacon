@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping(path = "/api/ticket")
 @RequiredArgsConstructor
 
-public class TicketController {
+public class    TicketController {
 
     private final TicketRepository repository;
 

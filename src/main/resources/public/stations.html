@@ -14,11 +14,28 @@
 
 </head>
 
+<body>
+    <div class="stationsTitle">
+        <i class="fa-solid fa-list"> </i> <label>Stations</label>
+    </div>
+    <div>
+        <button type="button" class="btn btn-success" id="addStation" onclick="addStation()"><i
+                class="fa-solid fa-plus"></i></button>
+        <table class="table table-striped" id="tableStations">
+            <tbody id="stationBody"></tbody>
+        </table>
+    </div>
+
     <script src="script.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
         </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        loadStations();
+    });
+    </script>
 
 </body>
 

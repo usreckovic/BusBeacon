@@ -12,7 +12,6 @@
 
 </head>
 
-
 <body data-bs-theme="white">
     <div class="container1">
 
@@ -31,34 +30,34 @@
 
         <div class="ticket">
             <div class="type">
-                    <div>
-                        <label for="from">From:</label>
-                        <select id="from" name="from" onblur="checkFrom()"></select>
-                        <span class="error" id="errorFrom"></span>
-                    </div>
+                <div>
+                    <label for="from">From:</label>
+                    <select id="from" name="from" onblur="checkFrom()"></select>
+                    <span class="error" id="errorFrom"></span>
+                </div>
 
-                    <div>
-                        <label for="to" style="padding-left: 1.1vw;">To:</label>
-                        <select id="to" name="to" onblur="checkTo()"></select>
-                        <span class="error" id="errorTo"></span>
-                    </div>
+                <div>
+                    <label for="to" style="padding-left: 1.1vw;">To:</label>
+                    <select id="to" name="to" onblur="checkTo()"></select>
+                    <span class="error" id="errorTo"></span>
+                </div>
 
-                    <div class="ways">
-                        <label>Choose type of travel:</label>
+                <div class="ways">
+                    <label>Choose type of travel:</label>
 
-                        <label for="one-way">
-                            <input type="radio" id="one-way" name="trip" value="One-Way" onblur="checkTrip()">
-                            <i class="fa-solid fa-share"></i> One Way
-                        </label>
+                    <label for="one-way">
+                        <input type="radio" id="one-way" name="trip" value="One-Way" onblur="checkTrip()">
+                        <i class="fa-solid fa-share"></i> One Way
+                    </label>
 
-                        <label for="round-trip">
-                            <input type="radio" id="round-trip" name="trip" value="Round-Trip" onblur="checkTrip()">
-                            <i class="fa-solid fa-arrows-left-right"></i> Round Trip
-                        </label>
+                    <label for="round-trip">
+                        <input type="radio" id="round-trip" name="trip" value="Round-Trip" onblur="checkTrip()">
+                        <i class="fa-solid fa-arrows-left-right"></i> Round Trip
+                    </label>
 
 
-                    </div>
-                    <span class="error" id="errorTrip"></span>
+                </div>
+                <span class="error" id="errorTrip"></span>
 
             </div>
 
@@ -70,7 +69,7 @@
                 <input type="date" id="dateStart" value="date-start" onblur="checkDate()">
                 <input type="date" id="dateEnd" value="date-end" onblur="checkDate()">
 
-                <input type="button" value="Submit" id="submit" onclick="finalCheckUp()" src="purchase.html"></input>
+                <input type="button" value="Submit" id="submit" onclick="finalCheckUp()"></input>
                 <span class="error" id="errorSubmit"></span>
             </div>
 
@@ -84,6 +83,14 @@
         </div>
 
         <script src="script.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                loadCities();
+            });
+        </script>
+        <script>
+            
+        </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
