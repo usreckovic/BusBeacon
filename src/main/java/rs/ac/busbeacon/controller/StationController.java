@@ -39,7 +39,7 @@ public class StationController {
 
     @DeleteMapping(path = "/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void deleteBusById(@PathVariable Integer id) {
+    public void deleteStationById(@PathVariable Integer id) {
         service.deleteById(id);
     }
 }

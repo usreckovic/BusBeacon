@@ -38,7 +38,7 @@ public class RouteController {
 
     @DeleteMapping(path = "/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void deleteBusById(@PathVariable Integer id) {
+    public void deleteRouteById(@PathVariable Integer id) {
         service.deleteById(id);
     }
 }

@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import rs.ac.busbeacon.entity.Bus;
 
 import java.time.LocalDateTime;
 
@@ -22,6 +21,9 @@ public class Route {
     @JoinColumn(name = "bus_id")
     private Bus bus;
 
+    @Column(nullable = false)
+    private String name;
+
     private LocalDateTime departureTime;
 
     private LocalDateTime arrivalTime;
@@ -29,4 +31,7 @@ public class Route {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    @JsonIgnore
+    private LocalDateTime deletedAt;
 }

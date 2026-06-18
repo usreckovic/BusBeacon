@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity(name = "ticket")
@@ -19,23 +20,38 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ticketId;
 
-    @Column(nullable = false)
-    private Integer routeId;
+    @ManyToOne
+    @JoinColumn(name = "route_id", nullable = false)
+    private Route route;
 
-    @Column(nullable = false)
-    private Integer seatNumber;
+    @ManyToOne
+    @JoinColumn(name = "to_station_id", nullable = false)
+    private Station toStation;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "from_station_id", nullable = false)
+    private Station fromStation;
+
+    @Column(columnDefinition = "ENUM('One-Way','Round-Trip')")
+    private String tripType;
+
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
+    @Column(nullable = false, unique = true)
+    private String ticketNumber;
+
     @Column(nullable = false)
-    private String qrCode;
+    private LocalDate travelDateStart;
+
+    @Column
+    private LocalDate travelDateEnd;
 
     private LocalDateTime createdAt;
 
     @JsonIgnore
     private LocalDateTime deletedAt;
 
-    private LocalDateTime paidAt;
+    private LocalDateTime updatedAt;
 
 }

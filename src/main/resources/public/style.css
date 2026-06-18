@@ -1,38 +1,38 @@
-body{
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.bg-custom-color{
+.bg-custom-color {
     background-color: #0390fc;
 }
 
 .container {
     font-size: larger;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     display: flex;
     align-items: center;
     width: 100%;
 }
 
-    .container .navbar-brand{
-        color: white;
-        font-size: x-large;
-        padding-bottom: 8px;
-    }
+.container .navbar-brand {
+    color: white;
+    font-size: x-large;
+    padding-bottom: 8px;
+}
 
-        .container .navbar-brand:hover{
-            color: white;
-        }
-        
+.container .navbar-brand:hover {
+    color: white;
+}
 
-    .container .nav-link{
-        color: rgb(238, 238, 238);
-        padding: 0px;
-        font-size: 17px;
-        white-space: nowrap;
-    }
 
-.ikona{
+.container .nav-link {
+    color: rgb(238, 238, 238);
+    padding: 0px;
+    font-size: 17px;
+    white-space: nowrap;
+}
+
+.ikona {
     border-radius: 30px;
     padding-bottom: 30px;
     height: 20px;
@@ -41,11 +41,11 @@ body{
     gap: 5px;
 }
 
-    .ikona:hover{
-        border: 2px solid rgb(238, 238, 238);
-    }
+.ikona:hover {
+    border: 2px solid rgb(238, 238, 238);
+}
 
-.about{
+.about {
     margin-left: auto;
 
     border-radius: 30px;
@@ -55,14 +55,14 @@ body{
     border: 2px solid transparent;
 }
 
-    .about:hover{
-        border: 2px solid rgb(238, 238, 238);
-    }
+.about:hover {
+    border: 2px solid rgb(238, 238, 238);
+}
 
-.container1{
+.container1 {
     display: grid;
-    grid-template-columns: repeat(10,1fr);
-    grid-template-rows: minmax(10,1fr);
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: minmax(10, 1fr);
     margin-inline: auto;
     max-width: 1350px;
     gap: 15px;
@@ -70,35 +70,35 @@ body{
     padding-bottom: 20px;
 }
 
-    .image{
-        background-color: #0390fc;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        grid-column: span 7;
-        grid-row: span 8;
-        width: 100%;
-        border-radius: 30px;
-        border: 5px solid  #6abfff;
-        object-fit: cover;
-        overflow: hidden;
-    }
+.image {
+    background-color: #0390fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: span 7;
+    grid-row: span 8;
+    width: 100%;
+    border-radius: 30px;
+    border: 5px solid #6abfff;
+    object-fit: cover;
+    overflow: hidden;
+}
 
-    .info{
-        background-color: #0390fc;
-        display:inline;
-        justify-content: center;
-        align-items: center;
-        grid-column: span 3;
-        grid-row: span 8;
-        padding: 1vw;
-        border-radius: 30px;
-        border: 5px solid  #6abfff;
-        font-size:larger;
-        color:white;
-    }
+.info {
+    background-color: #0390fc;
+    display: inline;
+    justify-content: center;
+    align-items: center;
+    grid-column: span 3;
+    grid-row: span 8;
+    padding: 1vw;
+    border-radius: 30px;
+    border: 5px solid #6abfff;
+    font-size: larger;
+    color: white;
+}
 
-.ticket{
+.ticket {
     border: 5px solid #6abfff;
     background-color: #0390fc;
     display: grid;
@@ -106,118 +106,119 @@ body{
     grid-column: span 10;
     border-radius: 30px;
     color: white;
-    padding: max(15px,1.5%);
+    padding: max(15px, 1.5%);
     padding-left: 1.2vw;
     min-height: 150px;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-    .ticket .type{
-        display:block;
-        align-items: center;
-        flex-wrap: wrap;
-        font-size: large;
-    }
-    
+.ticket .type {
+    display: block;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: large;
+}
 
-    .ticket .submit{
-        display: flex;
-        gap: 10px;
-        padding-left: 1.2vw;
-        padding-right: 1.2vw;
-    }
 
-    .ticket .date{
-        display: inline;
-        gap: 10px;
-        padding-left: 1.2vw;
-        padding-right: 1.2vw;
-    }
-    
-        .ticket .ways {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        }
-        
+.ticket .submit {
+    display: flex;
+    gap: 10px;
+    padding-left: 1.2vw;
+    padding-right: 1.2vw;
+}
 
-    .ticket .miniimage {
-        display: flex;
-        border-radius: 30px;
-        border: 4px solid #6abfff;
-        background-color: white;
-        margin-left: 0.55vw;
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-    }
+.ticket .date {
+    display: inline;
+    gap: 10px;
+    padding-left: 1.2vw;
+    padding-right: 1.2vw;
+}
 
-        .ticket .miniimage img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 26px;
-        }
-        
-        .separetor{
-            border-radius: 30px;
-        }
+.ticket .ways {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 
-        #submit,
-        #dateStart,
-        #dateEnd,
-        #from,
-        #to{
-            background-color: #0390fc;
-            color: white;
-            border: 3px solid #6abfff;
-            border-radius: 8px;
-            padding: 5px 10px;
-            border-radius: 30px;
-        }
 
-        #dateStart{
-            width:189px;
-            margin-bottom: 1vw;
-            height: max(30% 1vw);
-        }
+.ticket .miniimage {
+    display: flex;
+    border-radius: 30px;
+    border: 4px solid #6abfff;
+    background-color: white;
+    margin-left: 0.55vw;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
 
-        #dateEnd{
-            width:189px;
-            margin-bottom: 1vw;
-            height: max(30% 1vw);
-        }
+.ticket .miniimage img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 26px;
+}
 
-        #submit{
-            width: 100%;
-            font-size: larger;
-            height: 30%;
-        }
+.separetor {
+    border-radius: 30px;
+}
 
-        #submit:hover,
-        #dateStart:hover,
-        #dateEnd:hover,
-        #from:hover,
-        #to:hover{
-            color: rgb(26, 26, 26);
-            border: 3px solid white;
-        }
+#submit,
+#dateStart,
+#dateEnd,
+#from,
+#to {
+    background-color: #0390fc;
+    color: white;
+    border: 3px solid #6abfff;
+    border-radius: 8px;
+    padding: 5px 10px;
+    border-radius: 30px;
+}
 
-.error{
+#dateStart {
+    width: 189px;
+    margin-bottom: 1vw;
+    height: max(30% 1vw);
+}
+
+#dateEnd {
+    width: 189px;
+    margin-bottom: 1vw;
+    height: max(30% 1vw);
+}
+
+#submit {
+    width: 100%;
+    font-size: larger;
+    height: 30%;
+}
+
+#submit:hover,
+#dateStart:hover,
+#dateEnd:hover,
+#from:hover,
+#to:hover {
+    color: rgb(26, 26, 26);
+    border: 3px solid white;
+}
+
+.error {
     font-size: small;
     display: block;
 }
 
-.qrContainer{
+#qrContainer {
     border: 5px solid #6abfff;
+    margin-bottom: 20px;
 }
 
- /* Purchase.html */
+/* Purchase.html */
 
-.window{
+.window {
     margin: 60px;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -237,8 +238,8 @@ body{
 .purchaseType,
 .purchaseDateStart,
 .purchaseDateEnd,
-.purchaseEmail
-{
+.purchasePrice,
+.purchaseEmail {
     display: flex;
     background-color: #0390fc;
     color: white;
@@ -253,12 +254,12 @@ body{
     gap: 5px;
 }
 
-.infoTicket{
+.infoTicket {
     color: white;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.Purchase{
+.Purchase {
     background-color: #0390fc;
     color: white;
     border: 3px solid #6abfff;
@@ -271,51 +272,48 @@ body{
     font-size: larger;
 }
 
-    .Purchase:hover
-    {
+.Purchase:hover {
     color: rgb(26, 26, 26);
     border: 3px solid white;
-    }
+}
 
-    .Purchase:active
-    {
+.Purchase:active {
     color: rgb(26, 26, 26);
     border: 3px solid white;
-    }
+}
 
-.TermsAndConditions{
+.TermsAndConditions {
     color: white;
 }
 
-.purchaseEmail{
+.purchaseEmail {
     color: white;
 }
 
-    .purchaseEmailBox{
+.purchaseEmailBox {
     background-color: white;
     color: black;
     border: 3px solid #6abfff;
     border-radius: 8px;
     margin-top: 10px;
-    }
+}
 
-#errorConditions{
+#errorConditions {
     font-size: x-small;
 }
 
-#purchaseError{
+#purchaseError {
     color: white;
     font-size: large;
 }
 
-#errorEmail{
+#errorEmail {
     font-size: small;
 }
 
-.purchaseTicket
-{
+.purchaseTicket {
     margin: 60px;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -330,9 +328,9 @@ body{
     border: 5px solid #6abfff;
 }
 
- /* buses.html */
+/* buses.html */
 
-.busList{
+.busList {
     margin-top: 10px;
     margin-bottom: 40px;
     flex-direction: column;
@@ -343,15 +341,15 @@ body{
     max-width: 1100px;
     min-height: 600px;
     gap: 8px;
-    padding-left:45px ;
-    padding-right:0px ;
-    padding-top:40px ;
-    padding-bottom:25px ;
+    padding-left: 45px;
+    padding-right: 0px;
+    padding-top: 40px;
+    padding-bottom: 25px;
     border-radius: 30px;
     border: 5px solid #6abfff;
 }
 
-.busTitle{
+.busTitle {
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
@@ -368,14 +366,14 @@ body{
     border-radius: 30px;
 }
 
-#busImages{
+#busImages {
     border-radius: 50px;
     overflow: hidden;
     height: 280px;
 }
 
 
-#editButtonBus{
+#editButtonBus {
     background-color: #007BFF;
     border: white;
     border-radius: 10px;
@@ -387,7 +385,7 @@ body{
     font-size: 18px;
 }
 
-#deleteButtonBus{
+#deleteButtonBus {
     background-color: rgb(255, 66, 66);
     border: white;
     border-radius: 10px;
@@ -399,12 +397,11 @@ body{
 }
 
 #deleteButtonBus:hover,
-#editButtonBus:hover
-{
+#editButtonBus:hover {
     color: black;
 }
 
-.editBusContainer{
+.editBusContainer {
     margin: 20px;
     flex-direction: column;
     justify-content: center;
@@ -414,10 +411,10 @@ body{
     max-width: 1100px;
     min-height: 600px;
     gap: 8px;
-    padding-left:45px ;
-    padding-right:0px ;
-    padding-top:40px ;
-    padding-bottom:25px ;
+    padding-left: 45px;
+    padding-right: 0px;
+    padding-top: 40px;
+    padding-bottom: 25px;
     border-radius: 30px;
     border: 5px solid #6abfff;
 }
@@ -427,22 +424,21 @@ body{
 #busYear,
 #busCapacity,
 #busAc,
-#busImage
-{
+#busImage {
     max-width: 1000px;
     border: 5px solid #6abfff;
     border-radius: 30px;
     background-color: white;
 }
 
-#busId{
+#busId {
     max-width: 1000px;
     border: 5px solid #6abfff;
     border-radius: 30px;
     opacity: 90%;
 }
 
-#addBus{
+#addBus {
     display: flex;
     justify-content: center;
     background-color: rgb(66, 255, 66);
@@ -457,12 +453,11 @@ body{
     font-size: 25px;
 }
 
-#addBus:hover
-{
+#addBus:hover {
     color: black;
 }
 
-.addBusContainer{
+.addBusContainer {
     margin: 20px;
     flex-direction: column;
     justify-content: center;
@@ -472,22 +467,22 @@ body{
     max-width: 1100px;
     min-height: 600px;
     gap: 8px;
-    padding-left:45px ;
-    padding-right:0px ;
-    padding-top:40px ;
-    padding-bottom:25px ;
+    padding-left: 45px;
+    padding-right: 0px;
+    padding-top: 40px;
+    padding-bottom: 25px;
     border-radius: 30px;
     border: 5px solid #6abfff;
 }
 
 .errorBusCapacity,
 .errorBusBrand,
-.errorBusYear{
+.errorBusYear {
     color: white;
     font-size: small;
 }
 
-#tableStations{
+#tableStations {
     margin-inline: auto;
     border-radius: 30px;
     border: 5px solid #6abfff;
@@ -502,13 +497,13 @@ body{
     flex-direction: column;
 }
 
-#tableStationRow{
+#tableStationRow {
     border-radius: 10px;
     font-size: large;
     width: 15vw;
 }
 
-.stationsTitle{
+.stationsTitle {
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
@@ -525,7 +520,7 @@ body{
     border-radius: 30px;
 }
 
-.stationsTitleAE{
+.stationsTitleAE {
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
@@ -542,7 +537,7 @@ body{
     border-radius: 30px;
 }
 
-#addStation{
+#addStation {
     display: flex;
     justify-content: center;
     background-color: rgb(66, 255, 66);
@@ -557,7 +552,7 @@ body{
     font-size: 25px;
 }
 
-.editStationContainer{
+.editStationContainer {
     margin: 20px;
     flex-direction: column;
     justify-content: center;
@@ -567,10 +562,10 @@ body{
     max-width: 1100px;
     min-height: 500px;
     gap: 8px;
-    padding-left:45px ;
-    padding-right:0px ;
-    padding-top:40px ;
-    padding-bottom:25px ;
+    padding-left: 45px;
+    padding-right: 0px;
+    padding-top: 40px;
+    padding-bottom: 25px;
     border-radius: 30px;
     border: 5px solid #6abfff;
 }
@@ -579,22 +574,21 @@ body{
 #stationAddress,
 #stationGates,
 #busAc,
-#busImage
-{
+#busImage {
     max-width: 1000px;
     border: 5px solid #6abfff;
     border-radius: 10px;
     background-color: white;
 }
 
-#stationId{
+#stationId {
     max-width: 1000px;
     border: 5px solid #6abfff;
     border-radius: 10px;
     opacity: 90%;
 }
 
-.addStationContainer{
+.addStationContainer {
     margin: 20px;
     flex-direction: column;
     justify-content: center;
@@ -604,13 +598,251 @@ body{
     max-width: 1100px;
     min-height: 600px;
     gap: 8px;
-    padding-left:45px ;
-    padding-right:0px ;
-    padding-top:40px ;
-    padding-bottom:25px ;
+    padding-left: 45px;
+    padding-right: 0px;
+    padding-top: 40px;
+    padding-bottom: 25px;
     border-radius: 30px;
     border: 5px solid #6abfff;
 }
 
+#tableRoutes {
+    margin-inline: auto;
+    border-radius: 30px;
+    border: 5px solid #6abfff;
+    color: red;
+    overflow: hidden;
+    max-width: 1300px;
+    border-collapse: separate;
+    background-color: #007BFF;
+    margin-top: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
 
+#tableRouteRow {
+    border-radius: 10px;
+    font-size: large;
+    width: 15vw;
+}
 
+#tableRoutes {
+    margin-inline: auto;
+    border-radius: 30px;
+    border: 5px solid #6abfff;
+    color: red;
+    overflow: hidden;
+    max-width: 1300px;
+    border-collapse: separate;
+    background-color: #007BFF;
+    margin-top: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#tableRouteRow {
+    border-radius: 10px;
+    font-size: large;
+    width: 15vw;
+}
+
+.ticketList {
+    display: grid;
+    grid-template-columns: repeat(3, 3fr);
+    row-gap: 40px;
+    justify-content: center;
+    align-items: center;
+    background-color: #0390fc;
+    margin-inline: auto;
+    max-width: 1100px;
+    min-height: 600px;
+    padding-left: 47px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-radius: 30px;
+    border: 5px solid #6abfff;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+#ticketMain {
+    border-radius: 30px;
+    border: 5px solid #6abfff;
+}
+
+.ticketTitle {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0390fc;
+    color: white;
+    font-size: max(30px, 1vw);
+    gap: 5px;
+    margin-top: 20px;
+    margin-inline: auto;
+    border: 3px solid #6abfff;
+    height: 60px;
+    width: 180px;
+    border-radius: 30px;
+}
+
+#ticketTop {
+    display: flex;
+    justify-content: center;
+    margin-inline: auto;
+    background-color: #6abfff;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-bottom: 5px;
+}
+
+#ticketTicketsParts {
+    border-radius: 10px;
+    width: 250px;
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    margin-inline: auto;
+    border: 1px solid #c2c2c2;
+}
+
+#ticketBottom {
+    display: flex;
+    justify-content: center;
+    margin-inline: auto;
+    background-color: #6abfff;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    width: 250px;
+    font-size: small;
+}
+
+.addRouteContainer {
+    margin: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #0390fc;
+    margin-inline: auto;
+    max-width: 1100px;
+    min-height: 600px;
+    gap: 8px;
+    padding-left: 45px;
+    padding-right: 0px;
+    padding-top: 40px;
+    padding-bottom: 25px;
+    border-radius: 30px;
+    border: 5px solid #6abfff;
+}
+
+.editRouteContainer {
+    margin: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #0390fc;
+    margin-inline: auto;
+    max-width: 1100px;
+    min-height: 600px;
+    gap: 8px;
+    padding-left: 45px;
+    padding-right: 0px;
+    padding-top: 40px;
+    padding-bottom: 25px;
+    border-radius: 30px;
+    border: 5px solid #6abfff;
+}
+
+#busSelect,
+#routeName,
+#departureTime,
+#arrivalTime {
+    max-width: 1000px;
+    border: 5px solid #6abfff;
+    border-radius: 10px;
+    background-color: white;
+}
+
+#station1,
+#station2,
+#station3 {
+    width: 290px;
+    border: 5px solid #6abfff;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.TicketTitleE {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0390fc;
+    color: white;
+    font-size: max(20px, 1vw);
+    gap: 5px;
+    margin-top: 20px;
+    margin-inline: auto;
+    border: 3px solid #6abfff;
+    height: 60px;
+    width: 180px;
+    border-radius: 30px;
+}
+
+.editTicketContainer {
+    margin: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #0390fc;
+    margin-inline: auto;
+    max-width: 1100px;
+    min-height: 600px;
+    padding-left: 45px;
+    padding-right: 0px;
+    padding-top: 40px;
+    padding-bottom: 25px;
+    border-radius: 30px;
+    border: 5px solid #6abfff;
+}
+
+#ticketId {
+    max-width: 1000px;
+    border: 5px solid #6abfff;
+    border-radius: 10px;
+    opacity: 90%;
+}
+
+#travelDateEnd,
+#travelDateStart,
+#ticketTripType,
+#EditTicketPrice,
+#EditTicketTo,
+#EditTicketFrom {
+    max-width: 1000px;
+    border: 5px solid #6abfff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+#ticketSave {
+    margin-top: 20px;
+}
+
+#addRoutes {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(66, 255, 66);
+    border: white;
+    border-radius: 10px;
+    padding: 4px;
+    padding-top: 6px;
+    width: 65px;
+    height: 40px;
+    font-size: 18px;
+    margin-inline: auto;
+    font-size: 25px;
+}

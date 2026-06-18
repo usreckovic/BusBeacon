@@ -1,36 +1,33 @@
 package rs.ac.busbeacon.service;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import rs.ac.busbeacon.entity.Route;
+import rs.ac.busbeacon.repo.RouteRepository;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.stereotype.Service;
-
-import lombok.RequiredArgsConstructor;
-import rs.ac.busbeacon.entity.Bus;
-import rs.ac.busbeacon.entity.Route;
-import rs.ac.busbeacon.repo.RouteRepository;
-
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class RouteService {
+
     private final RouteRepository repository;
 
     public List<Route> getAll() {
-        return repository.findAll();
+        return repository.findAllByDeletedAtIsNull();
     }
 
     public Optional<Route> getById(Integer id) {
-        return repository.findById(id);
+        return repository.findByRouteIdAndDeletedAtIsNull(id);
     }
 
     public Route create(Route entity) {
-        Route route = new Route();
-        route.setBus(entity.getBus());
-        route.setDepartureTime(entity.getDepartureTime());
-        route.setArrivalTime(entity.getArrivalTime());
-        route.setCreatedAt(LocalDateTime.now());
-        return repository.save(route);
+        entity.setCreatedAt(LocalDateTime.now());
+        return repository.save(entity);
     }
 
     public Route update(Integer id, Route entity) {
@@ -38,12 +35,14 @@ public class RouteService {
         route.setBus(entity.getBus());
         route.setDepartureTime(entity.getDepartureTime());
         route.setArrivalTime(entity.getArrivalTime());
-        route.setCreatedAt(LocalDateTime.now());
+        route.setName(entity.getName());
+        route.setUpdatedAt(LocalDateTime.now());
         return repository.save(route);
     }
 
     public void deleteById(Integer id) {
-        repository.deleteById(id);
+        Route route = getById(id).orElseThrow();
+        route.setDeletedAt(LocalDateTime.now());
+        repository.save(route);
     }
-
 }
