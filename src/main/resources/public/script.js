@@ -456,26 +456,26 @@ function editBus(id) {
     window.location.href = "./edit-bus.html?id=" + id;
 }
 
-function addBusImage(){
-fetch("http://localhost:8080/api/bus")
-    .then(rsp => rsp.json())
-    .then(data => {
-        let dataList = document.getElementById('imageSuggestions')
+function addBusImage() {
+    fetch("http://localhost:8080/api/bus")
+        .then(rsp => rsp.json())
+        .then(data => {
+            let dataList = document.getElementById('imageSuggestions')
 
-        if (dataList) {
-            let diffrentImages = [];
-            let optionsHTML = '';
+            if (dataList) {
+                let diffrentImages = [];
+                let optionsHTML = '';
 
-            for (let Bus of data) {
-                if (Bus.imagePath && !diffrentImages.includes(Bus.imagePath)) {
-                    diffrentImages.push(Bus.imagePath);
-                    optionsHTML += `<option value="${Bus.imagePath}"></option>`;
+                for (let Bus of data) {
+                    if (Bus.imagePath && !diffrentImages.includes(Bus.imagePath)) {
+                        diffrentImages.push(Bus.imagePath);
+                        optionsHTML += `<option value="${Bus.imagePath}"></option>`;
+                    }
                 }
-            }
 
-            dataList.innerHTML = optionsHTML;
-        }
-    });
+                dataList.innerHTML = optionsHTML;
+            }
+        });
 }
 
 function openBuses() {
@@ -731,6 +731,7 @@ function loadRoutes() {
                 <button id="deleteButtonStation" class="btn btn-sm btn-danger" style="border:none" type="button" onclick="deleteRoute(${Route.routeId})">
                     <i class="fa-solid fa-trash-can"></i>
                 </button>
+                <button id="editButtonTicket" class="btn btn-sm btn-success"><i class="fa-solid fa-pen-to-square" onclick="editRoute(${Route.routeId})"></i></button>
                 </td>
             </tr>
             `;
@@ -799,6 +800,79 @@ function saveRoute() {
         })
 }
 
+function updateRoute() {
+
+    const routeId = new URLSearchParams(window.location.search).get("id");
+
+    fetch("/api/route", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            routeId: routeId,
+            name: document.getElementById("routeName").value,
+            departureTime: document.getElementById("departureTime").value,
+            arrivalTime: document.getElementById("arrivalTime").value,
+            bus: {
+                busId: document.getElementById("busSelect").value
+            }
+        })
+    })
+
+
+        .then(() => window.location.href = "routes.html");
+}
+
+
+function loadRouteData() {
+    fetch('/api/bus')
+        .then(rsp => rsp.json())
+        .then(data => {
+            let busSelect = document.getElementById('busSelect');
+
+            data.forEach(bus => {
+                busSelect.innerHTML +=
+                    `<option value="${bus.busId}">
+                        ${bus.brand} ${bus.model}
+                    </option>`;
+            });
+        });
+
+    fetch('/api/station')
+        .then(rsp => rsp.json())
+        .then(data => {
+            ['station1', 'station2', 'station3'].forEach(id => {
+                let sel = document.getElementById(id);
+
+                data.forEach(station => {
+                    sel.innerHTML +=
+                        `<option value="${station.stationId}">
+                            ${station.city}
+                        </option>`;
+                });
+            });
+        });
+
+    fetch(`/api/route-station?routeId=${routeId}`)
+        .then(rsp => rsp.json())
+        .then(data => {
+
+            if (data[0])
+                document.getElementById("station1").value =
+                    data[0].station.stationId;
+
+            if (data[1])
+                document.getElementById("station2").value =
+                    data[1].station.stationId;
+
+            if (data[2])
+                document.getElementById("station3").value =
+                    data[2].station.stationId;
+        });
+}
+
+
 // funkcije za Ticket --------------------------------------------------------------
 
 function loadTickets() {
@@ -857,6 +931,8 @@ function editTicket(id) {
     window.location.href = "./edit-ticket.html?id=" + id;
 }
 
+
+
 // provere za Ticket --------------------------------------------------------------
 
 function checkTicketDate() {
@@ -901,7 +977,7 @@ function checkTicketDate() {
 }
 
 function checkTicketFrom() {
-    let city = document.getElementById('ticketFrom').value;
+    let city = document.getElementById('EditTicketFrom').value;
 
     if (city === "") {
         document.getElementById('errorTicketFrom').style.display = 'inline';
@@ -915,7 +991,7 @@ function checkTicketFrom() {
 }
 
 function checkTicketTo() {
-    let city = document.getElementById('ticketTo').value;
+    let city = document.getElementById('EditTicketTo').value;
 
     if (city === "") {
         document.getElementById('errorTicketTo').style.display = 'inline';
@@ -928,15 +1004,15 @@ function checkTicketTo() {
     }
 }
 
-function checkTripType(){
+function checkTripType() {
     let trip = document.getElementById('ticketTripType').value;
 
-    if(trip == "" && trip == "NULL"){
+    if (trip == "" && trip == "NULL") {
         document.getElementById('errorTicketTrip').style.display = 'inline';
         document.getElementById('errorTicketTrip').textContent = "You have to select Type of Trip";
         return false;
     }
-    else{
+    else {
         document.getElementById('errorTicketTrip').textContent = "";
         return true;
     }
@@ -948,10 +1024,10 @@ function finalTicketCheckUp() {
     let checkUpTicketTo = checkTicketTo();
     let checkUpTicketType = checkTripType();
 
-    let from = document.getElementById("ticketFrom").value;
-    let to = document.getElementById("ticketTo").value;
+    let from = document.getElementById("EditTicketFrom").value;
+    let to = document.getElementById("EditTicketTo").value;
 
-    if(from === to){
+    if (from === to) {
         document.getElementById('errorTicketTo').style.display = 'inline';
         document.getElementById('errorTicketTo').textContent = "You can't choose same two cities";
         return false;

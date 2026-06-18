@@ -35,8 +35,8 @@ public class Ticket {
     @Column(columnDefinition = "ENUM('One-Way','Round-Trip')")
     private String tripType;
 
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal price;
+    @Column(nullable = false)
+    private Integer price;
 
     @Column(nullable = false, unique = true)
     private String ticketNumber;

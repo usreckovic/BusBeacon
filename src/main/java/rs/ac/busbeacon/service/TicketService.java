@@ -100,7 +100,7 @@ public class TicketService {
         ticket.setFromStation(fromStation);
         ticket.setToStation(toStation);
         ticket.setTripType(tripType);
-        ticket.setPrice(BigDecimal.valueOf(price));
+        ticket.setPrice(price);
         ticket.setTicketNumber(generateUniqueTicketNumber());
         ticket.setTravelDateStart(LocalDate.parse(travelDateStart));
         if (travelDateEnd != null && !travelDateEnd.isEmpty()) {
@@ -117,6 +117,7 @@ public class TicketService {
         ticket.setToStation(entity.getToStation());
         ticket.setTripType(entity.getTripType());
         ticket.setTravelDateStart(entity.getTravelDateStart());
+        ticket.setPrice(entity.getPrice());
         ticket.setTravelDateEnd(entity.getTravelDateEnd());
         ticket.setUpdatedAt(LocalDateTime.now());
         return ticketRepository.save(ticket);
